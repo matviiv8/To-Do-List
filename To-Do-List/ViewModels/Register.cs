@@ -15,6 +15,6 @@ namespace To_Do_List.ViewModels
         [Compare("Password", ErrorMessage = "Passwords don't match")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        public string PasswordConfirm { get; set; }
+        public string ConfirmPassword { get; set; }
     }
 }
