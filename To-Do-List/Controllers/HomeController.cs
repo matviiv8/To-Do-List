@@ -16,7 +16,7 @@ namespace To_Do_List.Controllers
         }
         public IActionResult Index()
         {
-            return User.Identity.IsAuthenticated ? View() : PartialView("NotAutorized");
+            return User.Identity.IsAuthenticated ? View() : PartialView("NotAuthorized");
         }
 
         public IActionResult Privacy()
