@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 using To_Do_List.Models;
 
 namespace To_Do_List.Controllers
@@ -13,10 +14,9 @@ namespace To_Do_List.Controllers
         {
             _logger = logger;
         }
-        [Authorize]
         public IActionResult Index()
         {
-            return View();
+            return User.Identity.IsAuthenticated ? View() : PartialView("NotAutorized");
         }
 
         public IActionResult Privacy()

@@ -39,10 +39,19 @@ namespace To_Do_List.Controllers
                 User user = await context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if(user == null)
                 {
-                    context.Users.Add(new User { Email = model.Email, Password = model.Password});
+                    user = new User { Email = model.Email, Password = model.Password};
+                    Role userRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+
+                    if(userRole != null)
+                    {
+                        user.Role= userRole;
+                    }
+
+                    context.Users.Add(user);
+
                     await context.SaveChangesAsync();
 
-                    await Authentificate(model.Email);
+                    await Authentificate(user);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -56,11 +65,12 @@ namespace To_Do_List.Controllers
             return View(model);
         }
 
-        private async Task Authentificate(string email)
+        private async Task Authentificate(User user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, email)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.Name)
             };
 
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
@@ -80,10 +90,13 @@ namespace To_Do_List.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await context.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+                User user = await context.Users
+                    .Include(u => u.Role)
+                    .FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+
                 if (user != null)
                 {
-                    await Authentificate(model.Email);
+                    await Authentificate(user);
 
                     return RedirectToAction("Index" ,"Home");
                 }
