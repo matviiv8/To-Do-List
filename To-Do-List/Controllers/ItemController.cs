@@ -1,15 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using To_Do_List.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace To_Do_List.Controllers
 {
     public class ItemController : Controller
     {
-        private ItemContext context;
+        private readonly ItemContext context;
 
-        public IActionResult Index()
+        public ItemController(ItemContext context)
         {
-            return View();
+            this.context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await context.Items.ToListAsync());
         }
 
         public IActionResult Create()
@@ -23,9 +32,9 @@ namespace To_Do_List.Controllers
         {
             if (ModelState.IsValid)
             {
-               context.Add(item);
-               context.SaveChanges();
-               return RedirectToAction(nameof(Index));
+                context.Add(item);
+                await context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(item);
         }
