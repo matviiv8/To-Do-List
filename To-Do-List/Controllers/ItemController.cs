@@ -47,5 +47,48 @@ namespace To_Do_List.Controllers
             }
             return View(item);
         }
-    }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var itemToUpdate = context.Items.FirstOrDefault(x => x.Id == id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,IsCompleted,Date")] Item item)
+        {
+            if(id != item.Id)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    context.Update(item);
+                    await context.SaveChangesAsync();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
+            }
+
+            return View(item);
+        }
+    } 
 }
