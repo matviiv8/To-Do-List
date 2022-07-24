@@ -30,11 +30,20 @@ namespace To_Do_List.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Description,IsCompleted,Date")] Item item)
         {
-            if (ModelState.IsValid)
+            try
             {
-                context.Add(item);
-                await context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    context.Add(item);
+                    await context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
             }
             return View(item);
         }
