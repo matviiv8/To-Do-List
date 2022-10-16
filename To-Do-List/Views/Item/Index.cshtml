@@ -4,11 +4,13 @@
     ViewData["Title"] = "To-Do List";
 }
 
-<h1>To-Do List:</h1>
+<h2>What do you have planned for today?</h2>
+<p><a asp-action="Create">Add Task</a></p>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if(Model.Count() == 0){
+    <h3>There are currently no entries</h3>
+}
+else{
 <table class="table">
     <thead>
         <tr>
@@ -31,10 +33,11 @@
                 @Html.DisplayFor(modelItem => item.IsComplete)
             </td>
             <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><a> |</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><a> |</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+}

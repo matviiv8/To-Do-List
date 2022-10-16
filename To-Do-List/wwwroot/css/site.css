@@ -1,5 +1,5 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -8,11 +8,27 @@ html {
   }
 }
 
+h2 {
+    color: rgba(129, 129, 129, 1);
+}
+
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+a {
+    background: linear-gradient(rgba(236, 72, 153, 1),rgba(139, 92, 246, 1),rgba(255, 255, 255, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+tr {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(31, 41, 55, 1);
 }
