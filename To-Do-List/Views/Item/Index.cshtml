@@ -14,11 +14,9 @@ else{
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsComplete)
+                Tasks:
             </th>
             <th></th>
         </tr>
@@ -27,10 +25,10 @@ else{
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.CheckBoxFor(modelItem => item.IsComplete)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsComplete)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><a> |</a>
