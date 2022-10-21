@@ -1,4 +1,4 @@
-html {
+﻿html {
     font-size: 14px;
 }
 
@@ -9,7 +9,7 @@ html {
 }
 
 h2 {
-    color: rgba(129, 129, 129, 1);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 html {
@@ -19,25 +19,29 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgba(24, 24, 36, 1);
 }
 
 a {
-    background: linear-gradient(rgba(236, 72, 153, 1),rgba(139, 92, 246, 1),rgba(255, 255, 255, 0));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+}
+
+table, tr {
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 1);
 }
 
 tr {
     width: 102px;
-    height: 32px;
-    color: rgba(255, 255, 255, 1);
-    font-family: 'Inter';
+    height: 12px;
+    font-family: 'Monda';
     font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 32px;
-    background-color: rgba(31, 41, 55, 1);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 59px;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(37, 39, 60, 1);
     flex: none;
     order: 0;
     flex-grow: 0;

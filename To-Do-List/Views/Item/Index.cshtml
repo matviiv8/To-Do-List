@@ -25,7 +25,16 @@ else{
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.CheckBoxFor(modelItem => item.IsComplete)
+                @if(item.IsComplete)
+                {
+                    @Html.ActionLink("\u2611", "Check", new { id = item.Id})
+                }
+                else
+                {
+                    @Html.ActionLink("\u2610", "Check", new { id = item.Id})
+
+                }
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

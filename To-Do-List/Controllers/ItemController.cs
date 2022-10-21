@@ -93,5 +93,12 @@ namespace To_Do_List.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Check(int id)
+        {
+            var thisItem = _context.Items.FirstOrDefault(items => items.Id == id);
+            thisItem.IsComplete = !thisItem.IsComplete;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
