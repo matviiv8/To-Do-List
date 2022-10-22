@@ -27,17 +27,19 @@ else{
             <td>
                 @if(item.IsComplete)
                 {
-                    @Html.ActionLink("\u2611", "Check", new { id = item.Id})
+                    @Html.ActionLink("\u2611", "Check", new { id = item.Id, @class = "input-checkbox"})
                 }
                 else
                 {
-                    @Html.ActionLink("\u2610", "Check", new { id = item.Id})
+                    @Html.ActionLink("\u2610", "Check", new { id = item.Id, @class = "input-checkbox"})
 
                 }
 
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                <div style="@(item.IsComplete ? "text-decoration: line-through rgba(255, 255, 255, 0.5);":"")">
+                    <span style="@(item.IsComplete ? "color: rgba(15, 144, 162, 0.57);":"")">@Html.DisplayFor(modelItem => item.Name)</span>
+                </div>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><a> |</a>
@@ -45,6 +47,11 @@ else{
             </td>
         </tr>
 }
+    <tr>
+        <td>@Model.Count(item=>item.IsComplete == true) Items</td>
+        <td></td>
+        <td></td>
+    </tr>
     </tbody>
 </table>
 }

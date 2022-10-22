@@ -2,19 +2,14 @@
     font-size: 14px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
 h2 {
     color: rgba(255, 255, 255, 0.7);
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
 body {
@@ -23,20 +18,24 @@ body {
 }
 
 a {
-    -webkit-background-clip: text;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 1);
 }
 
-table, tr {
-    border: 1px solid;
-    border-color: rgba(0, 0, 0, 1);
+table {
+    height: 350px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+table, tr, th, td, thead, tbody {
+    border: none;
+    text-align: center;
 }
 
 tr {
-    width: 102px;
-    height: 12px;
     font-family: 'Monda';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 200;
     font-size: 20px;
     line-height: 59px;
     letter-spacing: 0.1em;
